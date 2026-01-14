@@ -8,6 +8,76 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+  /* ---------- RESPONSIVE DESIGN ---------- */
+
+/* Large tablets / small desktops */
+@media (max-width: 1024px) {
+  .hero-card {
+    grid-template-columns: 1fr; /* stack avatar & info */
+    text-align: center;
+  }
+  .avatar {
+    margin: auto;
+  }
+  .about-cards {
+    justify-content: center;
+  }
+  .skills {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .projects {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  section {
+    padding: 6rem 1.5rem 3rem;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .about-card, .skill, .project, .education-card {
+    padding: 2rem;
+  }
+  nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  nav a {
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  section {
+    padding: 5rem 1rem 2rem;
+  }
+  nav {
+    padding: 0.3rem 0.6rem;
+    gap: 0.3rem;
+  }
+  nav a {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.9rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+  .hero-card {
+    padding: 2rem;
+  }
+  .about-card, .skill, .project, .education-card {
+    padding: 1.2rem;
+  }
+  .skills, .projects {
+    grid-template-columns: 1fr; /* single column stack */
+  }
+}
+
 :root{
   --bg:#0a0d1c;
   --glass:rgba(255,255,255,.08);
@@ -240,16 +310,128 @@ button{
 
 /* ---------------- RESPONSIVE ---------------- */
 @media(max-width:900px){
-  .hero-card{grid-template-columns:1fr;text-align:center}
+  .hero-card{grid-template-columns:1fr;text-align:left}
   .avatar{margin:auto}
   .stats{grid-template-columns:1fr}
 }
+/* ---------- MOBILE NAVBAR ---------- */
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 1100;
+  font-size: 1.8rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  color: #000;
+  cursor: pointer;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: 240px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 1rem;
+    border-radius: 0 24px 24px 0;
+    transition: left 0.35s ease;
+    background: rgba(10, 13, 28, 0.95);
+    backdrop-filter: blur(20px);
+  }
+
+  nav.open {
+    left: 0;
+  }
+
+  nav a {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+  }
+}
+nav {
+  left: 50%;
+  transform: translateX(-50%);
+}
+  @media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1100;
+    font-size: 1.6rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+    color: #000;
+    cursor: pointer;
+  }
+
+  nav {
+    position: fixed;
+    top: 60px;
+
+    /* ✅ MINIMUM SPACE */
+    width: max-content;
+    min-width: 170px;
+
+    left: -220px;
+    transform: none;
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+
+    padding: 0.8rem;
+    border-radius: 18px;
+
+    background: rgba(10, 13, 28, 0.95);
+    backdrop-filter: blur(18px);
+
+    transition: left 0.3s ease;
+    z-index: 1050;
+  }
+
+  nav.open {
+    left: 16px;
+  }
+
+  nav a {
+    width: 100%;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    display: block;
+  }
+}
+
+
+
 </style>
 </head>
 
 <body>
+<!-- MOBILE TOGGLE BUTTON -->
+<div class="menu-toggle" id="menuToggle">
+  ☰
+</div>
 
-<nav>
+<nav id="navbar">
   <a href="#home" class="active">Home</a>
   <a href="#about">About</a>
   <a href="#skills">Skills</a>
@@ -258,6 +440,7 @@ button{
   <a href="#projects">Projects</a>
   <a href="#contact">Contact</a>
 </nav>
+
 
 <!-- HOME / OVERVIEW -->
 <section id="home">
@@ -294,7 +477,7 @@ button{
   high-quality, production-ready software through a strong blend of manual
   testing, Selenium WebDriver automation, and comprehensive API validation.
   My journey into quality engineering is rooted in a solid Computer Science
-  foundation and a specialization in Information Security, which enables me
+  , which enables me
   to approach testing with both functional accuracy and a security-first mindset.
   <br><br>
   Over the course of my professional experience, I have worked extensively on
@@ -371,7 +554,7 @@ button{
   <div class="container">
     <h2>Education</h2>
     <div class="education">
-      <div class="edu"><h3>Btech. Computer Science</h3><p>Chandigarh Engineering College  (2020–2024)<br> CGPA 8.02</p></div>
+      <div class="edu"><h3>Btech. Computer Science</h3><p>Chandigarh Engineering College  (2020–2024)<br>• CGPA 7.5</p></div>
       <div class="edu"><h3>Senior Secondary (12th)</h3><p>CBSE • 2020 • 81%</p></div>
       <div class="edu"><h3>Secondary (10th)</h3><p>CBSE • 2017 • 70%</p></div>
     </div>
@@ -383,9 +566,9 @@ button{
   <div class="container">
     <h2>Projects</h2>
     <div class="projects">
-      <div class="project"><h3>ZeoCRM</h3><p>End-to-end QA ownership of a live university CRM platform with automation, API validation, and regression testing.</p></div>
-      <div class="project"><h3>ZeoVerify</h3><p>QA certification for Digilocker verification platform including payment gateways and client UAT.</p></div>
-      <div class="project"><h3>ZeoForex</h3><p>Full-cycle testing of multi-currency remittance workflows with stress and API testing.</p></div>
+      <div class="project"><h3><a href="https://zeocrm.com/" target="_blank">zeocrm</a></h3><p>End-to-end QA ownership of a live university CRM platform with automation, API validation, and regression testing.</p></div>
+      <div class="project"><h3><a href="https://zeoverify.com/" target="_blank">ZeoVerify</a></h3><p>QA certification for Digilocker verification platform including payment gateways and client UAT.</p></div>
+      <div class="project"><h3><a href="https://zeoforex.com/" target="_blank">ZeoForex</a></h3><p>Full-cycle testing of multi-currency remittance workflows with stress and API testing.</p></div>
       <div class="project"><h3>Selenium Dynamic Application Bot</h3><p>Automation bot handling dynamic multi-step forms with logging, retries, and cross-browser support.</p></div>
     </div>
   </div>
@@ -407,19 +590,34 @@ button{
 <script>
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
+const nav = document.getElementById("navbar");
+const toggle = document.getElementById("menuToggle");
 
+/* Active link on scroll */
 window.addEventListener("scroll", () => {
   let current = "";
   sections.forEach(sec => {
     if (scrollY >= sec.offsetTop - 150) current = sec.id;
   });
+
   navLinks.forEach(a => {
     a.classList.remove("active");
     if (a.getAttribute("href") === "#" + current)
       a.classList.add("active");
   });
 });
-</script>
 
+/* Toggle mobile menu */
+toggle.addEventListener("click", () => {
+  nav.classList.toggle("open");
+});
+
+/* Close menu after clicking link (mobile UX) */
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    nav.classList.remove("open");
+  });
+});
+</script>
 </body>
 </html>
